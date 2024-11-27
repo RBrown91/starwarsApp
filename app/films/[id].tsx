@@ -1,13 +1,23 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { Film } from "@/interfaces";
 import { COLORS } from "@/constants/colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from "@expo/vector-icons";
+import { FAVOURITE_KEY } from "@/constants/keys";
 
 const Page = () => {
   const { id } = useLocalSearchParams();
   const [film, setFilm] = useState<Film | null>();
   const [loading, setLoading] = useState(true);
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
     const fetchFilm = async () => {
@@ -15,6 +25,7 @@ const Page = () => {
         const response = await fetch(`https://swapi.dev/api/films/${id}`);
         const data = await response.json();
         setFilm(data);
+        checkFavouriteStatus(data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -24,6 +35,40 @@ const Page = () => {
 
     fetchFilm();
   }, [id]);
+
+  const checkFavouriteStatus = async (film: Film) => {
+    try {
+      const favourites = await AsyncStorage.getItem(FAVOURITE_KEY);
+      if (favourites) {
+        const favouriteFilms = JSON.parse(favourites) as Film[];
+        setIsFavourite(
+          favouriteFilms.some((f) => f.episode_id === film?.episode_id)
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const toggleFavourite = async () => {
+    try {
+      const favourites = await AsyncStorage.getItem(FAVOURITE_KEY);
+      let favouriteFilms = favourites ? JSON.parse(favourites) : [];
+
+      if (isFavourite) {
+        favouriteFilms = favouriteFilms.filter(
+          (f: Film) => f.episode_id === film?.episode_id
+        );
+      } else {
+        favouriteFilms.push(film);
+      }
+
+      await AsyncStorage.setItem(FAVOURITE_KEY, JSON.stringify(favouriteFilms));
+      setIsFavourite(!isFavourite);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (loading) {
     return (
@@ -43,6 +88,19 @@ const Page = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <TouchableOpacity onPress={toggleFavourite}>
+              <Ionicons
+                name={isFavourite ? "star" : "star-outline"}
+                size={24}
+                color={COLORS.text}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Text style={styles.title}>{film.title}</Text>
       <Text style={styles.details}>Episode: {film.episode_id}</Text>
       <Text style={styles.details}>Director: {film.director}</Text>
