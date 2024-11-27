@@ -26,6 +26,7 @@ export default function RootLayout() {
         name="films"
         options={{
           title: "Films",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="film-outline" color={color} size={size} />
           ),
