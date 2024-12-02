@@ -5,18 +5,20 @@ import { COLORS } from "@/constants/colors";
 type ListEmptyComponentProps = {
   loading: boolean;
   message?: string;
+  dataType: string;
 };
 
 const ListEmptyComponent = ({
   loading,
   message = "No films found",
+  dataType,
 }: ListEmptyComponentProps) => {
   return (
     <View style={styles.container}>
       {loading ? (
         <View style={styles.fetchingContainer}>
           <ActivityIndicator size={"large"} color={COLORS.text} />
-          <Text style={styles.emptyText}>Fetching Films</Text>
+          <Text style={styles.emptyText}>Fetching {dataType}</Text>
         </View>
       ) : (
         <Text style={styles.emptyText}>{message}</Text>

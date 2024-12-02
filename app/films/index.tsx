@@ -43,7 +43,11 @@ const Page = () => {
           />
         }
         ListEmptyComponent={() => (
-          <ListEmptyComponent loading={loading} message="No films found" />
+          <ListEmptyComponent
+            loading={loading}
+            message="No films found"
+            dataType="Films"
+          />
         )}
       />
     </View>
