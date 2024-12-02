@@ -21,5 +21,9 @@ AsyncStorage: Persistent storage for saving and managing user favorites.
 
 ## Screenshots 📸
 ![Screenshot 2024-12-02 at 19 28 34](https://github.com/user-attachments/assets/fc31e363-0e9e-4640-8f04-8fcf99b42cb1)
+![Screenshot 2024-12-02 at 20 05 03](https://github.com/user-attachments/assets/d60efabb-118d-42d7-83bb-d0d3981e852e)
+
 ![Screenshot 2024-12-02 at 19 28 55](https://github.com/user-attachments/assets/68a0bafa-b49f-4349-b5f5-eb1671db51a7)
 ![Screenshot 2024-12-02 at 19 28 08](https://github.com/user-attachments/assets/e4bee363-1908-4417-93ce-e418e5fd30a9)
+
+![Screenshot 2024-12-02 at 20 06 28](https://github.com/user-attachments/assets/1926fe64-1c11-4a1f-a92a-18f8467def63)
