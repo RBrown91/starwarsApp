@@ -1,5 +1,5 @@
 ## Star Wars Explorer 📽️🌌
-Star Wars Explorer is a mobile app built with React Native and TypeScript that allows fans of the Star Wars franchise to dive deeper into the galaxy far, far away. Using the Star Wars API (SWAPI), the app provides users with detailed information about the films and characters in the series. Users can favorite their preferred films and manage their favorites, ensuring their favorite parts of the galaxy are always within reach.
+Star Wars Explorer is a mobile app built with React Native and TypeScript that allows fans of the Star Wars franchise to dive deeper into the galaxy far, far away. Using the Star Wars API (SWAPI), the app provides users with detailed information about the films and characters in the series. Users can favorite their preferred films and manage them.
 
 ## Features 🚀
 # 🌟 Films
